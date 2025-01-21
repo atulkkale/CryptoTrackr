@@ -1,23 +1,26 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
-import Header from "./components/Header/Header";
 import Dashboard from "./views/Dashboard";
-import Footer from "./components/Footer/Footer";
 import OverView from "./views/OverView";
 import History from "./views/History";
+import Layout from "./components/Layout/Layout";
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/overview" element={<OverView />} />
           <Route path="/history" element={<History />} />
-        </Routes>
-      </main>
-      <Footer />
+        </Route>
+      </Routes>
     </Router>
   );
 };
