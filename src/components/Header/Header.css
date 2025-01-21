@@ -26,17 +26,22 @@
   margin-left: 30px;
 }
 
-.header nav li a {
+.header .nav-link {
   padding: 15px;
   border-radius: 100px;
   font-family: Helvetica, sans-serif;
   font-size: 16px;
   text-decoration: none;
   color: #14161a;
-  transition: .5s;
+  transition: 0.5s;
 }
 
-.header nav li a:hover {
+.header .nav-link.active {
+  background-color: #000;
+  color: #fff;
+}
+
+.header .nav-link:hover {
   background-color: #000;
   color: #fff;
 }

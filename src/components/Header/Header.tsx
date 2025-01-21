@@ -1,32 +1,53 @@
 import "./Header.css";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import SectionWrapper from "../SectionWrapper/SectionWrapper";
 
 const Header: React.FC = () => {
   return (
     <SectionWrapper tag="header" sectionClass="header">
       <h1>
-        <Link to="/" title="CryptoTrackR">
+        <Link
+          to="/"
+          title="CryptoTrackR"
+        >
           CryptoTrackR
         </Link>
       </h1>
       <nav>
         <ul>
           <li>
-            <Link to="/" title="Dashboard">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+              to="/"
+              title="Dashboard"
+            >
               Dashboard
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/overview" title="Overview">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+              to="/overview"
+              title="Overview"
+            >
               Overview
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/history" title="History">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+              to="/history"
+              title="History"
+            >
               History
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </nav>
