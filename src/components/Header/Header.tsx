@@ -2,18 +2,17 @@ import "./Header.css";
 
 import { Link, NavLink } from "react-router-dom";
 import SectionWrapper from "../SectionWrapper/SectionWrapper";
+import SelectedCrypto from "../SelectCrypto/SelectCrypto";
 
 const Header: React.FC = () => {
   return (
     <SectionWrapper tag="header" sectionClass="header">
       <h1>
-        <Link
-          to="/"
-          title="CryptoTrackR"
-        >
+        <Link to="/" title="CryptoTrackR">
           CryptoTrackR
         </Link>
       </h1>
+      <SelectedCrypto />
       <nav>
         <ul>
           <li>
