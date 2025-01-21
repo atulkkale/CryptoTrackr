@@ -1,7 +1,14 @@
+import CurrentPriceDisplay from "../components/CurrentPriceDisplay/CurrentPriceDisplay";
 import SectionWrapper from "../components/SectionWrapper/SectionWrapper";
 
 const Dashboard: React.FC = () => {
-  return <SectionWrapper sectionClass="dashboard">Dashboard</SectionWrapper>;
+  return (
+    <>
+      <SectionWrapper sectionClass="current-price-section">
+        <CurrentPriceDisplay />
+      </SectionWrapper>
+    </>
+  );
 };
 
 export default Dashboard;

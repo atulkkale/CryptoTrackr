@@ -1,0 +1,41 @@
+.current-price {
+  width: 239px;
+  height: 248px;
+  padding: 32px;
+  border-radius: 10px;
+  background-color: rgb(253, 237, 212);
+  text-transform: uppercase;
+}
+
+.current-price h2 {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.current-price img {
+  width: 81px;
+  margin: 32px 0;
+}
+
+.current-price .coin-price {
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  line-height: 28px;
+}
+
+.current-price ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.current-price .price {
+  color: #4b5563;
+}
+
+.current-price .percentage {
+  color: #22c55e;
+}
