@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 const SelectedCrypto: React.FC = () => {
   const [selectedCrypto, setSelectedCrypto] = useState<string>("");
   const dispatch = useDispatch();
-  const { isPending, isError, data, refetch } = useQuery({
+  const { isPending, data, refetch } = useQuery({
     queryKey: ["assets"],
     queryFn: fetchAssets,
     enabled: false,
@@ -26,11 +26,7 @@ const SelectedCrypto: React.FC = () => {
     dispatch(selectCrypto(e.target.value));
   }
 
-  if (isPending) return <LoadingText />;
-
-  if (isError || data.length === 0) {
-    // Set global complex_error to true.
-  }
+  if (isPending || data.length === 0) return <LoadingText />;
 
   const assetOptions = data.map((asset: { name: string; id: string }) => (
     <option key={asset.id} value={asset.name}>
