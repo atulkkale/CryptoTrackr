@@ -24,6 +24,7 @@ const App: React.FC = () => {
             <Route path="/overview" element={<OverView />} />
             <Route path="/history" element={<History />} />
           </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </QueryClientProvider>
