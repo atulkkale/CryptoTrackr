@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CryptoState {
-  activeCrypto: string | null;
+  activeCrypto: string;
 }
 
 const initialState: CryptoState = {
-  activeCrypto: null,
+  activeCrypto: '',
 };
 
 const cryptoSlice = createSlice({

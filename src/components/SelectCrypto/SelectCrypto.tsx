@@ -1,19 +1,34 @@
 import { useQuery } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
 
 import "./SelectCrypto.css";
 
 import { fetchAssets } from "../../api/cryptoApi";
 import LoadingText from "../LoadingText/LoadingText";
+import { selectCrypto } from "../../store/cryptoSlice";
+import { useEffect, useState } from "react";
 
 const SelectedCrypto: React.FC = () => {
-  const { isPending, isError, data } = useQuery({
+  const [selectedCrypto, setSelectedCrypto] = useState<string>("");
+  const dispatch = useDispatch();
+  const { isPending, isError, data, refetch } = useQuery({
     queryKey: ["assets"],
     queryFn: fetchAssets,
+    enabled: false,
   });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  function handleCryptoChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    setSelectedCrypto(e.target.value);
+    dispatch(selectCrypto(e.target.value));
+  }
 
   if (isPending) return <LoadingText />;
 
-  if (isError) {
+  if (isError || data.length === 0) {
     // Set global complex_error to true.
   }
 
@@ -24,9 +39,14 @@ const SelectedCrypto: React.FC = () => {
   ));
 
   if (data) {
+    dispatch(selectCrypto(data[0].name));
+    selectCrypto(data[0].name);
+
     return (
       <div className="selected-crypto">
-        <select>{assetOptions}</select>
+        <select value={selectedCrypto} onChange={handleCryptoChange}>
+          {assetOptions}
+        </select>
       </div>
     );
   }
