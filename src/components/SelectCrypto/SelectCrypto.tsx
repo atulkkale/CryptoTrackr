@@ -21,6 +21,13 @@ const SelectedCrypto: React.FC = () => {
     refetch();
   }, [refetch]);
 
+  useEffect(() => {
+    if (data) {
+      dispatch(selectCrypto(data[0].id));
+      selectCrypto(data[0].id);
+    }
+  }, [data]);
+
   function handleCryptoChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setSelectedCrypto(e.target.value);
     dispatch(selectCrypto(e.target.value));
@@ -29,15 +36,12 @@ const SelectedCrypto: React.FC = () => {
   if (isPending || data.length === 0) return <LoadingText />;
 
   const assetOptions = data.map((asset: { name: string; id: string }) => (
-    <option key={asset.id} value={asset.name}>
+    <option key={asset.id} value={asset.id}>
       {asset.name}
     </option>
   ));
 
   if (data) {
-    dispatch(selectCrypto(data[0].name));
-    selectCrypto(data[0].name);
-
     return (
       <div className="selected-crypto">
         <select value={selectedCrypto} onChange={handleCryptoChange}>

@@ -36,6 +36,10 @@
   color: #4b5563;
 }
 
-.current-price .percentage {
+.current-price .percentage-positive {
   color: #22c55e;
+}
+
+.current-price .percentage-negative {
+  color: red;
 }

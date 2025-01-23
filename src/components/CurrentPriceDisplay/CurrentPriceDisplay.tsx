@@ -1,20 +1,46 @@
+import { useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
+
 import "./CurrentPriceDisplay.css";
+import { RootState } from "../../store/store";
+import { fetchAssetById } from "../../api/cryptoApi";
 
 const CurrentPriceDisplay: React.FC = () => {
-  return (
-    <div className="current-price">
-      <h2>Bitcoin</h2>
-      <img
-        src="https://criptic.vercel.app/_next/static/media/bitcoin.81bd702b.svg"
-        alt="Bitcoin"
-      />
-      <div className="coin-price">0.2231345 BTC</div>
-      <ul>
-        <li className="price">11,032.24 USD</li>
-        <li className="percentage">↑ +12.5%</li>
-      </ul>
-    </div>
+  const selectedCrypto = useSelector(
+    (state: RootState) => state.crypto.activeCrypto
   );
+
+  const { isPending, data } = useQuery({
+    queryKey: ["asset", selectedCrypto],
+    queryFn: () => fetchAssetById(selectedCrypto),
+  });
+
+  if (data) {
+    return (
+      <div className="current-price">
+        <h2>{data.name}</h2>
+        <img
+          src="https://criptic.vercel.app/_next/static/media/bitcoin.81bd702b.svg"
+          alt={data.name}
+        />
+        <div className="coin-price">0.2231345 BTC</div>
+        <ul>
+          <li className="price">{parseFloat(data.priceUsd).toFixed(2)} USD</li>
+          <li
+            className={
+              data.changePercent24Hr > 0
+                ? "percentage-positive"
+                : "percentage-negative"
+            }
+          >
+            {data.changePercent24Hr > 0 ? "↑" : "↓"}{" "}
+            {data.changePercent24Hr > 0 ? "+" : ""}
+            {parseFloat(data.changePercent24Hr).toFixed(2)}
+          </li>
+        </ul>
+      </div>
+    );
+  }
 };
 
 export default CurrentPriceDisplay;
