@@ -1,24 +1,35 @@
+import { useQuery } from "@tanstack/react-query";
+
 import "./SelectCrypto.css";
 
+import { fetchAssets } from "../../api/cryptoApi";
+import LoadingText from "../LoadingText/LoadingText";
+
 const SelectedCrypto: React.FC = () => {
-  return (
-    <div className="selected-crypto">
-      <select>
-        <option value="Bitcoin">Bitcoin</option>
-        <option value="Ethereum">Ethereum</option>
-        <option value="XRP">XRP</option>
-        <option value="Bitcoin Cash">Bitcoin Cash</option>
-        <option value="EOS">EOS</option>
-        <option value="Stellar">Stellar</option>
-        <option value="Litecoin">Litecoin</option>
-        <option value="Cardano">Cardano</option>
-        <option value="Tether">Tether</option>
-        <option value="IOTA">IOTA</option>
-        <option value="TRON">TRON</option>
-        <option value="Ethereum Classic">Ethereum Classic</option>
-      </select>
-    </div>
-  );
+  const { isPending, isError, data } = useQuery({
+    queryKey: ["assets"],
+    queryFn: fetchAssets,
+  });
+
+  if (isPending) return <LoadingText />;
+
+  if (isError) {
+    // Set global complex_error to true.
+  }
+
+  const assetOptions = data.map((asset: { name: string; id: string }) => (
+    <option key={asset.id} value={asset.name}>
+      {asset.name}
+    </option>
+  ));
+
+  if (data) {
+    return (
+      <div className="selected-crypto">
+        <select>{assetOptions}</select>
+      </div>
+    );
+  }
 };
 
 export default SelectedCrypto;
