@@ -1,24 +1,26 @@
 import axios from "axios";
 
-export const fetchAssets = async () => {
+import { Asset, CoinCapAssetRes, CoinCapAssetsRes } from "../types/api";
+
+export const fetchAssets = async (): Promise<Asset[]> => {
   try {
-    const assetsData = await axios.get(
+    const assetsData = await axios.get<CoinCapAssetsRes>(
       "https://api.coincap.io/v2/assets?limit=12"
     );
     return assetsData.data?.data || [];
   } catch (err) {
-    return err;
+    throw new Error("Failed to fetch assets");
   }
 };
 
-export const fetchAssetById = async (assetId: string) => {
+export const fetchAssetById = async (assetId: string): Promise<Asset> => {
   try {
-    const assetData = await axios.get(
+    const assetData = await axios.get<CoinCapAssetRes>(
       `https://api.coincap.io/v2/assets/${assetId}`
     );
     console.log(assetData.data?.data);
     return assetData.data?.data;
   } catch (err) {
-    return err;
+    throw new Error("Failed to fetch assets");
   }
 };

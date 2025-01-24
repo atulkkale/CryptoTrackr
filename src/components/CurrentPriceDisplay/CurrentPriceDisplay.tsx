@@ -10,9 +10,10 @@ const CurrentPriceDisplay: React.FC = () => {
     (state: RootState) => state.crypto.activeCrypto
   );
 
-  const { isPending, data } = useQuery({
+  const { data } = useQuery({
     queryKey: ["asset", selectedCrypto],
     queryFn: () => fetchAssetById(selectedCrypto),
+    enabled: !!selectedCrypto,
   });
 
   if (data) {
@@ -30,12 +31,12 @@ const CurrentPriceDisplay: React.FC = () => {
           <li className="price">{parseFloat(data.priceUsd).toFixed(2)} USD</li>
           <li
             className={
-              data.changePercent24Hr > 0
+              parseFloat(data.changePercent24Hr) > 0
                 ? "percentage-positive"
                 : "percentage-negative"
             }
           >
-            {data.changePercent24Hr > 0 ? "↑ +" : "↓ "}
+            {parseFloat(data.changePercent24Hr) > 0 ? "↑ +" : "↓ "}
             {parseFloat(data.changePercent24Hr).toFixed(2)}
           </li>
         </ul>

@@ -33,9 +33,9 @@ const SelectedCrypto: React.FC = () => {
     dispatch(selectCrypto(e.target.value));
   }
 
-  if (isPending || data.length === 0) return <LoadingText />;
+  if (isPending || data?.length === 0) return <LoadingText />;
 
-  const assetOptions = data.map((asset: { name: string; id: string }) => (
+  const assetOptions = data?.map((asset: { name: string; id: string }) => (
     <option key={asset.id} value={asset.id}>
       {asset.name}
     </option>
