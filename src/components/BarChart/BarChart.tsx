@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Bar } from "react-chartjs-2";
 import { fetchAssets } from "../../api/cryptoApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import {
   Chart as ChartJS,
@@ -12,6 +12,8 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
+import { updateLastFetchTime } from "../../store/cryptoSlice";
+import { getCurrentTime } from "@utils/util";
 
 ChartJS.register(
   CategoryScale,
@@ -23,15 +25,20 @@ ChartJS.register(
 );
 
 const BarChart: React.FC = () => {
+  const dispatch = useDispatch();
   const selectedCryptos = useSelector(
     (state: RootState) => state.crypto.fetchedCryptoCurrencies
   );
 
-  const { data } = useQuery({
+  const { data, fetchStatus } = useQuery({
     queryKey: ["assets"],
     queryFn: () => fetchAssets(null, selectedCryptos.join(",")),
     refetchInterval: 5000,
   });
+
+  if (fetchStatus === "fetching") {
+    dispatch(updateLastFetchTime(getCurrentTime()));
+  }
 
   const changePercent24Hr = data?.map((assets) => assets.changePercent24Hr);
 

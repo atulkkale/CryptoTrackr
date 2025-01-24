@@ -13,25 +13,32 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 import { fetchMarkets } from "../../api/cryptoApi";
 import { RootState } from "../../store/store";
+import { updateLastFetchTime } from "../../store/cryptoSlice";
+import { getCurrentTime } from "@utils/util";
 
 const History = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filterExchange, setFilterExchange] = useState<string>("");
 
+  const dispatch = useDispatch();
   const selectedCrypto = useSelector(
     (state: RootState) => state.crypto.activeCrypto
   );
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, fetchStatus } = useQuery({
     queryKey: ["markets", selectedCrypto],
     queryFn: () => fetchMarkets(selectedCrypto!),
     enabled: !!selectedCrypto,
   });
+
+  if (fetchStatus === "fetching") {
+    dispatch(updateLastFetchTime(getCurrentTime()));
+  }
 
   if (isLoading) return <Typography>Loading...</Typography>;
   if (isError) return <Typography>Error loading data</Typography>;
