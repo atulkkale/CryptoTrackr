@@ -23,7 +23,9 @@ const CurrentPriceDisplay: React.FC = () => {
           src="https://criptic.vercel.app/_next/static/media/bitcoin.81bd702b.svg"
           alt={data.name}
         />
-        <div className="coin-price">0.2231345 BTC</div>
+        <div className="coin-price">
+          {parseFloat(data.priceUsd).toFixed(7)} {data.symbol}
+        </div>
         <ul>
           <li className="price">{parseFloat(data.priceUsd).toFixed(2)} USD</li>
           <li
@@ -33,8 +35,7 @@ const CurrentPriceDisplay: React.FC = () => {
                 : "percentage-negative"
             }
           >
-            {data.changePercent24Hr > 0 ? "↑" : "↓"}{" "}
-            {data.changePercent24Hr > 0 ? "+" : ""}
+            {data.changePercent24Hr > 0 ? "↑ +" : "↓ "}
             {parseFloat(data.changePercent24Hr).toFixed(2)}
           </li>
         </ul>
