@@ -21,3 +21,11 @@ export interface CoinCapAssetRes {
   data: Asset;
   timestamp: number;
 }
+
+export interface MarketData {
+  exchangeId: string;
+  baseSymbol: string;
+  quoteSymbol: string;
+  priceUsd: string;
+  volumeUsd24Hr: string;
+}
