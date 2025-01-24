@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CryptoState {
   activeCrypto: string;
+  fetchedCryptoCurrencies: string[];
 }
 
 const initialState: CryptoState = {
-  activeCrypto: '',
+  activeCrypto: "",
+  fetchedCryptoCurrencies: [],
 };
 
 const cryptoSlice = createSlice({
@@ -15,8 +17,11 @@ const cryptoSlice = createSlice({
     selectCrypto: (state, action: PayloadAction<string>) => {
       state.activeCrypto = action.payload;
     },
+    setFetchCryptoCurrencies: (state, action: PayloadAction<string[]>) => {
+      state.fetchedCryptoCurrencies = action.payload;
+    },
   },
 });
 
-export const { selectCrypto } = cryptoSlice.actions;
+export const { selectCrypto, setFetchCryptoCurrencies } = cryptoSlice.actions;
 export default cryptoSlice.reducer;

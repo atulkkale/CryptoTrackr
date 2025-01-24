@@ -5,15 +5,19 @@ import "./SelectCrypto.css";
 
 import { fetchAssets } from "../../api/cryptoApi";
 import LoadingText from "../LoadingText/LoadingText";
-import { selectCrypto } from "../../store/cryptoSlice";
+import {
+  selectCrypto,
+  setFetchCryptoCurrencies,
+} from "../../store/cryptoSlice";
 import { useEffect, useState } from "react";
+import { Asset } from "../../types/api";
 
 const SelectedCrypto: React.FC = () => {
   const [selectedCrypto, setSelectedCrypto] = useState<string>("");
   const dispatch = useDispatch();
   const { isPending, data, refetch } = useQuery({
     queryKey: ["assets"],
-    queryFn: fetchAssets,
+    queryFn: () => fetchAssets("12"),
     enabled: false,
   });
 
@@ -24,6 +28,7 @@ const SelectedCrypto: React.FC = () => {
   useEffect(() => {
     if (data) {
       dispatch(selectCrypto(data[0].id));
+      dispatch(setFetchCryptoCurrencies(data.map((asset) => asset.id)));
       selectCrypto(data[0].id);
     }
   }, [data]);
@@ -35,7 +40,7 @@ const SelectedCrypto: React.FC = () => {
 
   if (isPending || data?.length === 0) return <LoadingText />;
 
-  const assetOptions = data?.map((asset: { name: string; id: string }) => (
+  const assetOptions = data?.map((asset: Asset) => (
     <option key={asset.id} value={asset.id}>
       {asset.name}
     </option>

@@ -2,11 +2,22 @@ import axios from "axios";
 
 import { Asset, CoinCapAssetRes, CoinCapAssetsRes } from "../types/api";
 
-export const fetchAssets = async (): Promise<Asset[]> => {
+export const fetchAssets = async (
+  limit: string | null = "",
+  ids: string = ""
+): Promise<Asset[]> => {
   try {
-    const assetsData = await axios.get<CoinCapAssetsRes>(
-      "https://api.coincap.io/v2/assets?limit=12"
-    );
+    let url = "https://api.coincap.io/v2/assets";
+
+    if (limit) {
+      url += `?limit=${limit}`;
+    }
+
+    if (ids) {
+      url += `${limit ? "&" : "?"}ids=${ids}`;
+    }
+
+    const assetsData = await axios.get<CoinCapAssetsRes>(url);
     return assetsData.data?.data || [];
   } catch (err) {
     throw new Error("Failed to fetch assets");
