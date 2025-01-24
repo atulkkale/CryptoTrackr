@@ -1,7 +1,36 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "ESNext", // Target modern JavaScript (Vite supports modern browsers by default)
+    "module": "ESNext", // Use ECMAScript modules
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // Include modern JavaScript and browser APIs
+    "jsx": "react-jsx", // Enable the new JSX runtime for React 17+ (reduces the need for React import)
+    "strict": true, // Enable all strict type-checking options
+
+    /* Output Control */
+    "noEmit": true, // Prevent TypeScript from emitting any `.js` files
+
+    /* Type Checking Options */
+    "skipLibCheck": true, // Skip type checking of declaration files for faster builds
+    "forceConsistentCasingInFileNames": true, // Enforce consistent file name casing
+
+    /* Module Resolution */
+    "moduleResolution": "Node", // Use Node.js module resolution
+    "isolatedModules": true, // Required when noEmit is set, as Vite will handle the module processing
+    "resolveJsonModule": true, // Allow importing JSON files
+
+    /* Source Maps and Debugging */
+    "sourceMap": true, // Generate source maps for better debugging in Vite
+    "esModuleInterop": true, // Provide compatibility for CommonJS modules
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules without default exports
+
+    /* Paths and Aliases */
+    "baseUrl": ".", // Set the base directory for imports
+    "paths": {
+      "@components/*": ["src/components/*"], // Example of an alias for components
+      "@utils/*": ["src/utils/*"]
+    }
+  },
+  "include": ["src/**/*"], // Include all files in the `src` directory
+  "exclude": ["node_modules", "dist"] // Exclude these directories from type-checking
 }
