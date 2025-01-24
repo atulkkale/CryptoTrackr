@@ -20,7 +20,7 @@ const Header: React.FC = () => {
               className={({ isActive }) =>
                 isActive ? "nav-link active" : "nav-link"
               }
-              to="/"
+              to="/dashboard"
               title="Dashboard"
             >
               Dashboard
