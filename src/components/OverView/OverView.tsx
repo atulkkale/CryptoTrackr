@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { fetchAssetById } from "../../api/cryptoApi";
 import { RootState } from "../../store/store";
 
-const OverViewInfo: React.FC = () => {
+const OverView: React.FC = () => {
   const selectedCrypto = useSelector(
     (state: RootState) => state.crypto.activeCrypto
   );
@@ -27,4 +27,4 @@ const OverViewInfo: React.FC = () => {
   );
 };
 
-export default OverViewInfo;
+export default OverView;

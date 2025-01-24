@@ -2,7 +2,7 @@ import BarChart from "../components/BarChart/BarChart";
 import CurrentPriceDisplay from "../components/CurrentPriceDisplay/CurrentPriceDisplay";
 import SectionWrapper from "../components/SectionWrapper/SectionWrapper";
 
-const Dashboard: React.FC = () => {
+const DashboardPage: React.FC = () => {
   return (
     <>
       <SectionWrapper sectionClass="current-price-section">
@@ -15,4 +15,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPage;
