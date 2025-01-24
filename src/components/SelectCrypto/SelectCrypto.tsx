@@ -27,15 +27,17 @@ const SelectedCrypto: React.FC = () => {
 
   useEffect(() => {
     if (data) {
-      dispatch(selectCrypto(data[0].id));
+      dispatch(selectCrypto(data[0]));
       dispatch(setFetchCryptoCurrencies(data.map((asset) => asset.id)));
-      selectCrypto(data[0].id);
     }
   }, [data]);
 
   function handleCryptoChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setSelectedCrypto(e.target.value);
-    dispatch(selectCrypto(e.target.value));
+    if (data) {
+      const selectedCrypto = data.find((asset) => asset.id === e?.target.value);
+      dispatch(selectCrypto(selectedCrypto!));
+    }
   }
 
   if (isPending || data?.length === 0) return <LoadingText />;

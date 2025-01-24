@@ -12,7 +12,7 @@ const CurrentPriceDisplay: React.FC = () => {
 
   const { data } = useQuery({
     queryKey: ["asset", selectedCrypto],
-    queryFn: () => fetchAssetById(selectedCrypto),
+    queryFn: () => fetchAssetById(selectedCrypto?.id),
     enabled: !!selectedCrypto,
     refetchInterval: 5000,
   });

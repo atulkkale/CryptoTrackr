@@ -24,7 +24,7 @@ export const fetchAssets = async (
   }
 };
 
-export const fetchAssetById = async (assetId: string): Promise<Asset> => {
+export const fetchAssetById = async (assetId: string | undefined): Promise<Asset> => {
   try {
     const assetData = await axios.get<CoinCapAssetRes>(
       `https://api.coincap.io/v2/assets/${assetId}`
