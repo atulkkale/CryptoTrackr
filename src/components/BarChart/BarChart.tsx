@@ -1,8 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import { Bar } from 'react-chartjs-2';
-import { fetchAssets } from '../../api/cryptoApi';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import "./BarChart.css";
+
+import { useQuery } from "@tanstack/react-query";
+import { Bar } from "react-chartjs-2";
+import { fetchAssets } from "../../api/cryptoApi";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import {
   Chart as ChartJS,
   BarElement,
@@ -11,10 +13,10 @@ import {
   LinearScale,
   Title,
   Tooltip,
-} from 'chart.js';
-import { updateLastFetchTime } from '../../store/cryptoSlice';
-import { getCurrentTime } from '@utils/util';
-import { useEffect } from 'react';
+} from "chart.js";
+import { updateLastFetchTime } from "../../store/cryptoSlice";
+import { getCurrentTime } from "@utils/util";
+import { useEffect } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -32,13 +34,13 @@ const BarChart: React.FC = () => {
   );
 
   const { data, fetchStatus } = useQuery({
-    queryKey: ['assets'],
-    queryFn: () => fetchAssets(null, selectedCryptos.join(',')),
+    queryKey: ["assets"],
+    queryFn: () => fetchAssets(null, selectedCryptos.join(",")),
     refetchInterval: 5000,
   });
 
   useEffect(() => {
-    if (fetchStatus === 'fetching') {
+    if (fetchStatus === "fetching") {
       dispatch(updateLastFetchTime(getCurrentTime()));
     }
   }, [fetchStatus]);
@@ -49,10 +51,10 @@ const BarChart: React.FC = () => {
     labels: selectedCryptos,
     datasets: [
       {
-        label: '24h Percentage Change',
+        label: "24h Percentage Change",
         data: changePercent24Hr,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
       },
     ],
@@ -62,7 +64,7 @@ const BarChart: React.FC = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top' as const,
+        position: "top" as const,
       },
       tooltip: {
         callbacks: {
