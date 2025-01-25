@@ -1,15 +1,28 @@
+.current-price-section {
+   padding: 40px 0 25px;
+}
+
 .current-price {
-  width: 239px;
+  margin: 0 auto;
+  width: 70%;
   height: 248px;
   padding: 32px;
   border-radius: 10px;
   background-color: rgb(253, 237, 212);
   text-transform: uppercase;
+  transition: .5s;
+}
+
+.current-price .crypto-images {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .current-price h2 {
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .current-price img {
@@ -25,7 +38,7 @@
   line-height: 28px;
 }
 
-.current-price ul {
+.current-price .price-percentage-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
