@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { fetchMarkets } from "../../api/cryptoApi";
 import { RootState } from "../../store/store";
@@ -36,9 +36,11 @@ const History: React.FC = () => {
     enabled: !!selectedCrypto,
   });
 
-  if (fetchStatus === "fetching") {
-    dispatch(updateLastFetchTime(getCurrentTime()));
-  }
+  useEffect(() => {
+    if (fetchStatus === "fetching") {
+      dispatch(updateLastFetchTime(getCurrentTime()));
+    }
+  }, [fetchStatus]);
 
   if (isLoading) return <Typography>Loading...</Typography>;
   if (isError) return <Typography>Error loading data</Typography>;

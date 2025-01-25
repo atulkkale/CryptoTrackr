@@ -6,6 +6,7 @@ import { RootState } from "../../store/store";
 import { fetchAssetById } from "../../api/cryptoApi";
 import { updateLastFetchTime } from "../../store/cryptoSlice";
 import { getCurrentTime } from "@utils/util";
+import { useEffect } from "react";
 
 const CurrentPriceDisplay: React.FC = () => {
   const dispatch = useDispatch();
@@ -20,9 +21,11 @@ const CurrentPriceDisplay: React.FC = () => {
     refetchInterval: 5000,
   });
 
-  if (fetchStatus === "fetching") {
-    dispatch(updateLastFetchTime(getCurrentTime()));
-  }
+  useEffect(() => {
+    if (fetchStatus === "fetching") {
+      dispatch(updateLastFetchTime(getCurrentTime()));
+    }
+  }, [fetchStatus]);
 
   if (data) {
     return (

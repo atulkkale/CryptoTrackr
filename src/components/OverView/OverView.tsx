@@ -6,6 +6,7 @@ import { RootState } from "../../store/store";
 import { updateLastFetchTime } from "../../store/cryptoSlice";
 import { getCurrentTime } from "@utils/util";
 import CryptoDescription from "@components/CryptoDescription/CryptoDescription";
+import { useEffect } from "react";
 
 const OverView: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,9 +27,11 @@ const OverView: React.FC = () => {
     enabled: !!selectedCrypto,
   });
 
-  if (fetchStatus === "fetching") {
-    dispatch(updateLastFetchTime(getCurrentTime()));
-  }
+  useEffect(() => {
+    if (fetchStatus === "fetching") {
+      dispatch(updateLastFetchTime(getCurrentTime()));
+    }
+  }, [fetchStatus]);
 
   return (
     <>

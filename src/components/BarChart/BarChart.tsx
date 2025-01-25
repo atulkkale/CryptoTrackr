@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import { updateLastFetchTime } from "../../store/cryptoSlice";
 import { getCurrentTime } from "@utils/util";
+import { useEffect } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -36,9 +37,11 @@ const BarChart: React.FC = () => {
     refetchInterval: 5000,
   });
 
-  if (fetchStatus === "fetching") {
-    dispatch(updateLastFetchTime(getCurrentTime()));
-  }
+  useEffect(() => {
+    if (fetchStatus === "fetching") {
+      dispatch(updateLastFetchTime(getCurrentTime()));
+    }
+  }, [fetchStatus]);
 
   const changePercent24Hr = data?.map((assets) => assets.changePercent24Hr);
 
