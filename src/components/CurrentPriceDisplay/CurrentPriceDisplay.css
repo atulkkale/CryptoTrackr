@@ -1,5 +1,5 @@
 .current-price-section {
-   padding: 40px 0 50px;
+  padding: 40px 0 50px;
 }
 
 .current-price {
@@ -10,7 +10,7 @@
   border-radius: 10px;
   background-color: rgb(253, 237, 212);
   text-transform: uppercase;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .current-price .crypto-images {
@@ -55,4 +55,38 @@
 
 .current-price .percentage-negative {
   color: red;
+}
+
+@media only screen and (max-width: 992px) {
+  .current-price {
+    width: calc(100% - 65px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .current-price {
+    height: auto;
+  }
+
+  .current-price .crypto-images li {
+    flex-basis: 15%;
+  }
+
+  .current-price img {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .current-price h2 {
+    font-size: 18px;
+  }
+
+  .current-price .coin-price {
+    font-size: 15px;
+  }
+
+  .current-price img {
+    margin: 15px 0;
+  }
 }
