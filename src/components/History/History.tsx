@@ -21,7 +21,7 @@ import { RootState } from "../../store/store";
 import { updateLastFetchTime } from "../../store/cryptoSlice";
 import { getCurrentTime } from "@utils/util";
 
-const History = () => {
+const History: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filterExchange, setFilterExchange] = useState<string>("");
 
