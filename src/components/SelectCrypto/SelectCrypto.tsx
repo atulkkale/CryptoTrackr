@@ -15,7 +15,7 @@ import { Asset } from "../../types/api";
 const SelectedCrypto: React.FC = () => {
   const [selectedCrypto, setSelectedCrypto] = useState<string>("");
   const dispatch = useDispatch();
-  const { isPending, data, refetch } = useQuery({
+  const { isPending, data, refetch, isSuccess } = useQuery({
     queryKey: ["assets"],
     queryFn: () => fetchAssets("12"),
     enabled: false,
@@ -26,11 +26,11 @@ const SelectedCrypto: React.FC = () => {
   }, [refetch]);
 
   useEffect(() => {
-    if (data) {
+    if (isSuccess) {
       dispatch(selectCrypto(data[0].id));
       dispatch(setFetchCryptoCurrencies(data.map((asset) => asset.id)));
     }
-  }, [data]);
+  }, [isSuccess]);
 
   function handleCryptoChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setSelectedCrypto(e.target.value);
