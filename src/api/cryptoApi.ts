@@ -36,7 +36,6 @@ export const fetchAssetById = async (
     const assetData = await axios.get<CoinCapAssetRes>(
       `https://api.coincap.io/v2/assets/${assetId}`
     );
-    console.log(assetData.data?.data);
     return assetData.data?.data;
   } catch (err) {
     throw new Error("Failed to fetch assets");
