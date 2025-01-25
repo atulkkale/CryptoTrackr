@@ -63,11 +63,11 @@ const History: React.FC = () => {
   );
 
   return (
-    <Box sx={{ padding: 2 }}>
-      <Typography variant="h4" gutterBottom>
-        Bitcoin Markets
+    <Box sx={{ marginBottom: 5 }}>
+      <Typography variant="h5" gutterBottom sx={{ marginBottom: 4 }}>
+        Crypto Markets
       </Typography>
-      <Box sx={{ display: "flex", gap: 2, marginBottom: 2 }}>
+      <Box sx={{ display: "flex", gap: 2, marginBottom: 4 }}>
         <TextField
           label="Search"
           variant="outlined"
@@ -94,11 +94,15 @@ const History: React.FC = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Exchange</TableCell>
-              <TableCell>Base Symbol</TableCell>
-              <TableCell>Quote Symbol</TableCell>
-              <TableCell align="right">Price (USD)</TableCell>
-              <TableCell align="right">24Hr Volume (USD)</TableCell>
+              <TableCell sx={{ fontWeight: 600 }}>Exchange</TableCell>
+              <TableCell sx={{ fontWeight: 600 }}>Base Symbol</TableCell>
+              <TableCell sx={{ fontWeight: 600 }}>Quote Symbol</TableCell>
+              <TableCell sx={{ fontWeight: 600 }} align="right">
+                Price (USD)
+              </TableCell>
+              <TableCell sx={{ fontWeight: 600 }} align="right">
+                24Hr Volume (USD)
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
