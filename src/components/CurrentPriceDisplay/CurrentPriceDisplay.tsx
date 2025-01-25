@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 import "./CurrentPriceDisplay.css";
+
 import { RootState } from "../../store/store";
 import { fetchAssetById } from "../../api/cryptoApi";
 import { updateLastFetchTime } from "../../store/cryptoSlice";
 import { getCurrentTime } from "@utils/util";
-import { useEffect } from "react";
 
 const CurrentPriceDisplay: React.FC = () => {
   const dispatch = useDispatch();
