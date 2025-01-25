@@ -11,11 +11,13 @@ const CryptoDescription: React.FC = () => {
     (state: RootState) => state.crypto.activeCrypto
   );
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["description", selectedCrypto],
     queryFn: () => fetchDescriptionById(selectedCrypto!),
     enabled: !!selectedCrypto,
   });
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="crypto-description">
