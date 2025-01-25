@@ -4,7 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 
 import { fetchDescriptionById } from "../../api/cryptoApi";
-import { RootState } from "src/store/store";
+import { RootState } from "../../store/store";
+import Loader from "@components/Loader/Loader";
 
 const CryptoDescription: React.FC = () => {
   const selectedCrypto = useSelector(
@@ -17,7 +18,7 @@ const CryptoDescription: React.FC = () => {
     enabled: !!selectedCrypto,
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="crypto-description">
