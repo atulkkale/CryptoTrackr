@@ -29,34 +29,38 @@ const CurrentPriceDisplay: React.FC = () => {
     }
   }, [fetchStatus]);
 
-  return (
-    <div
-      className="current-price"
-      style={{ backgroundColor: getRandomPriceCardColor() }}
-    >
-      <h2>{data!.name}</h2>
-      <img
-        src="https://criptic.vercel.app/_next/static/media/bitcoin.81bd702b.svg"
-        alt={data!.name}
-      />
-      <div className="coin-price">
-        <LivePrice id={selectedCrypto!} /> {data!.symbol}
+  if (data) {
+    return (
+      <div
+        className="current-price"
+        style={{ backgroundColor: getRandomPriceCardColor() }}
+      >
+        <h2>{data!.name}</h2>
+        <img
+          src="https://criptic.vercel.app/_next/static/media/bitcoin.81bd702b.svg"
+          alt={data!.name}
+        />
+        <div className="coin-price">
+          <LivePrice id={selectedCrypto!} /> {data!.symbol}
+        </div>
+        <ul>
+          <li className="price">{parseFloat(data!.priceUsd).toFixed(2)} USD</li>
+          <li
+            className={
+              parseFloat(data!.changePercent24Hr) > 0
+                ? 'percentage-positive'
+                : 'percentage-negative'
+            }
+          >
+            {parseFloat(data!.changePercent24Hr) > 0 ? '↑ +' : '↓ '}
+            {parseFloat(data!.changePercent24Hr).toFixed(2)}
+          </li>
+        </ul>
       </div>
-      <ul>
-        <li className="price">{parseFloat(data!.priceUsd).toFixed(2)} USD</li>
-        <li
-          className={
-            parseFloat(data!.changePercent24Hr) > 0
-              ? 'percentage-positive'
-              : 'percentage-negative'
-          }
-        >
-          {parseFloat(data!.changePercent24Hr) > 0 ? '↑ +' : '↓ '}
-          {parseFloat(data!.changePercent24Hr).toFixed(2)}
-        </li>
-      </ul>
-    </div>
-  );
+    );
+  }
+
+  return null;
 };
 
 export default CurrentPriceDisplay;
