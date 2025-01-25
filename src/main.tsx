@@ -6,11 +6,14 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import ErrorBoundary from "@components/ErrorBoundary/ErrorBoundary";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ErrorBoundary>
   </StrictMode>
 );
