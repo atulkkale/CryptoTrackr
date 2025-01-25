@@ -1,17 +1,24 @@
-import { memo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 
-interface CryptoDescriptionProps {
-  description: string | null;
-}
+import { fetchDescriptionById } from "../../api/cryptoApi";
+import { RootState } from "src/store/store";
 
-const CryptoDescription: React.FC<CryptoDescriptionProps> = memo(
-  ({ description }) => {
-    return (
-      <div className="crypto-description">
-        <p>{description ? description : "Description not found"}</p>
-      </div>
-    );
-  }
-);
+const CryptoDescription: React.FC = () => {
+  const selectedCrypto = useSelector(
+    (state: RootState) => state.crypto.activeCrypto
+  );
+
+  const { data: description } = useQuery({
+    queryKey: ["description", selectedCrypto],
+    queryFn: () => fetchDescriptionById(selectedCrypto!),
+    enabled: !!selectedCrypto,
+  });
+  return (
+    <div className="crypto-description">
+      <p>{description ? description : "Description not found"}</p>
+    </div>
+  );
+};
 
 export default CryptoDescription;

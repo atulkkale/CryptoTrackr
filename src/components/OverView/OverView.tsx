@@ -1,48 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
-
-import { fetchAssetById, fetchDescriptionById } from "../../api/cryptoApi";
-import { RootState } from "../../store/store";
-import { updateLastFetchTime } from "../../store/cryptoSlice";
-import { getCurrentTime } from "@utils/util";
 import CryptoDescription from "@components/CryptoDescription/CryptoDescription";
-import { useEffect } from "react";
+import CryptoOverView from "@components/CryptoOverView/CryptoOverView";
 
 const OverView: React.FC = () => {
-  const dispatch = useDispatch();
-  const selectedCrypto = useSelector(
-    (state: RootState) => state.crypto.activeCrypto
-  );
-
-  const { data, fetchStatus } = useQuery({
-    queryKey: ["asset", selectedCrypto],
-    queryFn: () => fetchAssetById(selectedCrypto!),
-    enabled: !!selectedCrypto,
-    refetchInterval: 5000,
-  });
-
-  const { data: cryptoDescription } = useQuery({
-    queryKey: ["description", selectedCrypto],
-    queryFn: () => fetchDescriptionById(selectedCrypto!),
-    enabled: !!selectedCrypto,
-  });
-
-  useEffect(() => {
-    if (fetchStatus === "fetching") {
-      dispatch(updateLastFetchTime(getCurrentTime()));
-    }
-  }, [fetchStatus]);
-
   return (
     <>
-      <ul>
-        <li>Market Cap - {parseFloat(data?.marketCapUsd!).toFixed(2)}</li>
-        <li>Total Supply - {parseFloat(data?.maxSupply!).toFixed(2)}</li>
-        <li>Circulating Supply - {parseFloat(data?.supply!).toFixed(2)}</li>
-        <li>All-time High price - {parseFloat(data?.priceUsd!).toFixed(2)}</li>
-        <li>Rank - {parseFloat(data?.rank!).toFixed(2)}</li>
-      </ul>
-      <CryptoDescription description={cryptoDescription!} />
+      <CryptoOverView />
+      <CryptoDescription />
     </>
   );
 };
