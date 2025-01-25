@@ -39,35 +39,35 @@ const CurrentPriceDisplay: React.FC = () => {
         className="current-price"
         style={{ backgroundColor: getRandomPriceCardColor() }}
       >
-        <h2>{data!.name}</h2>
+        <h2>{data.name}</h2>
         <ul className="crypto-images">
           <li>
-            <img src={bitCoinImg} alt={data!.name} />
+            <img src={bitCoinImg} alt={data.name} />
           </li>
           <li>
-            <img src={tetherImg} alt={data!.name} />
+            <img src={tetherImg} alt={data.name} />
           </li>
           <li>
-            <img src={cardanoImg} alt={data!.name} />
+            <img src={cardanoImg} alt={data.name} />
           </li>
           <li>
-            <img src={binanceImg} alt={data!.name} />
+            <img src={binanceImg} alt={data.name} />
           </li>
         </ul>
         <div className="coin-price">
-          <LivePrice id={selectedCrypto!} /> {data!.symbol}
+          <LivePrice id={selectedCrypto!} symbol={data.symbol} />
         </div>
         <ul className="price-percentage-info">
-          <li className="price">{parseFloat(data!.priceUsd).toFixed(2)} USD</li>
+          <li className="price">{parseFloat(data.priceUsd).toFixed(2)} USD</li>
           <li
             className={
-              parseFloat(data!.changePercent24Hr) > 0
+              parseFloat(data.changePercent24Hr) > 0
                 ? "percentage-positive"
                 : "percentage-negative"
             }
           >
-            {parseFloat(data!.changePercent24Hr) > 0 ? "↑ +" : "↓ "}
-            {parseFloat(data!.changePercent24Hr).toFixed(2)}
+            {parseFloat(data.changePercent24Hr) > 0 ? "↑ +" : "↓ "}
+            {parseFloat(data.changePercent24Hr).toFixed(2)}
           </li>
         </ul>
       </div>
