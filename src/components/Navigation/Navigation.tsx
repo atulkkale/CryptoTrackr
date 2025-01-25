@@ -1,3 +1,5 @@
+import "./Navigation.css";
+
 import { NavLink } from "react-router-dom";
 
 const Navigation: React.FC = () => {
