@@ -10,12 +10,20 @@
   border-radius: 10px;
   background-color: rgb(253, 237, 212);
   text-transform: uppercase;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
   transition: 0.5s;
 }
 
 .current-price .crypto-images {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -39,8 +47,14 @@
 }
 
 .current-price .price-percentage-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   font-size: 12px;
 }
@@ -69,6 +83,7 @@
   }
 
   .current-price .crypto-images li {
+    -ms-flex-preferred-size: 15%;
     flex-basis: 15%;
   }
 
