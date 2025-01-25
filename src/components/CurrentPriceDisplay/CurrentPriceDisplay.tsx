@@ -8,6 +8,7 @@ import { RootState } from "../../store/store";
 import { fetchAssetById } from "../../api/cryptoApi";
 import { updateLastFetchTime } from "../../store/cryptoSlice";
 import { getCurrentTime } from "@utils/util";
+import LivePrice from "@components/LivePrice/LivePrice";
 
 const CurrentPriceDisplay: React.FC = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const CurrentPriceDisplay: React.FC = () => {
           alt={data.name}
         />
         <div className="coin-price">
-          {parseFloat(data.priceUsd).toFixed(7)} {data.symbol}
+          <LivePrice id={data.id} /> {data.symbol}
         </div>
         <ul>
           <li className="price">{parseFloat(data.priceUsd).toFixed(2)} USD</li>
