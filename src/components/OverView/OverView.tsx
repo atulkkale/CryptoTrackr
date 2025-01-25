@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchAssetById } from "../../api/cryptoApi";
+import { fetchAssetById, fetchDescriptionById } from "../../api/cryptoApi";
 import { RootState } from "../../store/store";
 import { updateLastFetchTime } from "../../store/cryptoSlice";
 import { getCurrentTime } from "@utils/util";
+import CryptoDescription from "@components/CryptoDescription/CryptoDescription";
 
 const OverView: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,18 +20,27 @@ const OverView: React.FC = () => {
     refetchInterval: 5000,
   });
 
+  const { data: cryptoDescription } = useQuery({
+    queryKey: ["description", selectedCrypto],
+    queryFn: () => fetchDescriptionById(selectedCrypto!),
+    enabled: !!selectedCrypto,
+  });
+
   if (fetchStatus === "fetching") {
     dispatch(updateLastFetchTime(getCurrentTime()));
   }
 
   return (
-    <ul>
-      <li>Market Cap - {parseFloat(data?.marketCapUsd!).toFixed(2)}</li>
-      <li>Total Supply - {parseFloat(data?.maxSupply!).toFixed(2)}</li>
-      <li>Circulating Supply - {parseFloat(data?.supply!).toFixed(2)}</li>
-      <li>All-time High price - {parseFloat(data?.priceUsd!).toFixed(2)}</li>
-      <li>Rank - {parseFloat(data?.rank!).toFixed(2)}</li>
-    </ul>
+    <>
+      <ul>
+        <li>Market Cap - {parseFloat(data?.marketCapUsd!).toFixed(2)}</li>
+        <li>Total Supply - {parseFloat(data?.maxSupply!).toFixed(2)}</li>
+        <li>Circulating Supply - {parseFloat(data?.supply!).toFixed(2)}</li>
+        <li>All-time High price - {parseFloat(data?.priceUsd!).toFixed(2)}</li>
+        <li>Rank - {parseFloat(data?.rank!).toFixed(2)}</li>
+      </ul>
+      <CryptoDescription description={cryptoDescription!} />
+    </>
   );
 };
 
