@@ -9,8 +9,6 @@ const LivePrice: React.FC<LivePriceProps> = memo(({ id }) => {
   const [livePrice, setLivePrice] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  console.log("id", id);
-
   useEffect(() => {
     const ws = new WebSocket(`wss://ws.coincap.io/prices?assets=${id}`);
 
@@ -18,7 +16,7 @@ const LivePrice: React.FC<LivePriceProps> = memo(({ id }) => {
       try {
         setIsLoading(false);
         setError(null);
-        console.log(event.data);
+
         const price = JSON.parse(event.data);
         setLivePrice(price[id]);
       } catch (err) {
@@ -26,8 +24,7 @@ const LivePrice: React.FC<LivePriceProps> = memo(({ id }) => {
       }
     };
 
-    ws.onerror = (err) => {
-      console.log("err", err);
+    ws.onerror = () => {
       setError("Cannot fetch live price!");
     };
 
