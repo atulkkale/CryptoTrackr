@@ -1,3 +1,5 @@
+import "./Footer.css";
+
 import { useSelector } from "react-redux";
 import SectionWrapper from "../SectionWrapper/SectionWrapper";
 import { RootState } from "../../store/store";
@@ -8,8 +10,7 @@ const Footer: React.FC = () => {
   );
   return (
     <SectionWrapper tag="footer" sectionClass="footer">
-      This is the footer.
-      <h3>The last updated time is {lastUpdated}</h3>
+      <p>Data last updated on {lastUpdated}.</p>
     </SectionWrapper>
   );
 };
