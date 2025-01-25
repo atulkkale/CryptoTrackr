@@ -1,23 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
+import { useQuery } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
 
-import './SelectCrypto.css';
+import "./SelectCrypto.css";
 
-import { fetchAssets } from '../../api/cryptoApi';
-import LoadingText from '../LoadingText/LoadingText';
+import { fetchAssets } from "../../api/cryptoApi";
+import LoadingText from "../LoadingText/LoadingText";
 import {
   selectCrypto,
   setFetchCryptoCurrencies,
-} from '../../store/cryptoSlice';
-import { useEffect, useState } from 'react';
-import { Asset } from '../../types/api';
+} from "../../store/cryptoSlice";
+import { useEffect, useState } from "react";
+import { Asset } from "../../types/api";
 
 const SelectedCrypto: React.FC = () => {
-  const [selectedCrypto, setSelectedCrypto] = useState<string>('');
+  const [selectedCrypto, setSelectedCrypto] = useState<string>("");
   const dispatch = useDispatch();
-  const { isPending, data, refetch, isSuccess } = useQuery({
-    queryKey: ['assets'],
-    queryFn: () => fetchAssets('12'),
+  const { isPending, data, refetch, isSuccess, isError } = useQuery({
+    queryKey: ["assets"],
+    queryFn: () => fetchAssets("12"),
     enabled: false,
   });
 
@@ -38,6 +38,8 @@ const SelectedCrypto: React.FC = () => {
   }
 
   if (isPending || data?.length === 0) return <LoadingText />;
+
+  if (isError) return <p>Error occurred!</p>;
 
   const assetOptions = data?.map((asset: Asset) => (
     <option key={asset.id} value={asset.id}>
