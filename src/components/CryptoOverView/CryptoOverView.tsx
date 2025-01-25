@@ -1,3 +1,5 @@
+import "./CryptoOverView.css";
+
 import { useQuery } from "@tanstack/react-query";
 import { getCurrentTime } from "@utils/util";
 import { useEffect } from "react";
@@ -27,12 +29,31 @@ const CryptoOverView: React.FC = () => {
   }, [fetchStatus]);
 
   return (
-    <ul>
-      <li>Market Cap - {parseFloat(data?.marketCapUsd!).toFixed(2)}</li>
-      <li>Total Supply - {parseFloat(data?.maxSupply!).toFixed(2)}</li>
-      <li>Circulating Supply - {parseFloat(data?.supply!).toFixed(2)}</li>
-      <li>All-time High price - {parseFloat(data?.priceUsd!).toFixed(2)}</li>
-      <li>Rank - {parseFloat(data?.rank!).toFixed(2)}</li>
+    <ul className="crypto-over-view">
+      <ul>
+        <li>
+          <h2>Rank</h2>
+          <span>{parseFloat(data?.rank!).toFixed(2)}</span>
+        </li>
+        <li>
+          <h2>Market Cap</h2>
+          <span>{parseFloat(data?.marketCapUsd!).toFixed(2)}</span>
+        </li>
+        <li>
+          <h2>Total Supply</h2>
+          <span>{parseFloat(data?.maxSupply!).toFixed(2)}</span>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <h2>All-time High price</h2>
+          <span>{parseFloat(data?.priceUsd!).toFixed(2)}</span>
+        </li>
+        <li>
+          <h2>Circulating Supply</h2>
+          <span>{parseFloat(data?.supply!).toFixed(2)}</span>
+        </li>
+      </ul>
     </ul>
   );
 };
