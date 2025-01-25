@@ -4,6 +4,7 @@ import SectionWrapper from "../SectionWrapper/SectionWrapper";
 import SelectedCrypto from "../SelectCrypto/SelectCrypto";
 import HeadingTitle from "@components/HeadingTitle/HeadingTitle";
 import Navigation from "@components/Navigation/Navigation";
+import MobileNavigation from "@components/MobileNavigation/MobileNavigation";
 
 const Header: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const Header: React.FC = () => {
       <HeadingTitle />
       <SelectedCrypto />
       <Navigation />
+      <MobileNavigation />
     </SectionWrapper>
   );
 };

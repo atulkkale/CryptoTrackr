@@ -27,3 +27,15 @@
   background-color: #000;
   color: #fff;
 }
+
+@media only screen and (max-width: 1024px) {
+  .header nav li {
+    margin-left: 15px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .header nav {
+    display: none;
+  }
+}

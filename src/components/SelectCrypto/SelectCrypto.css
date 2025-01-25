@@ -1,5 +1,6 @@
 .selected-crypto {
   min-width: 350px;
+  margin-left: 30px;
   position: relative;
 }
 
@@ -7,7 +8,7 @@
   appearance: none;
   width: 100%;
   font-size: 1.15rem;
-  padding: 0.675em 6em 0.675em 1em;
+  padding: 0.675em 0.675em 0.675em 1em;
   background-color: #fff;
   border: 1px solid #caced1;
   border-radius: 0.25rem;
@@ -37,4 +38,23 @@
   border-right: var(--size) solid transparent;
   border-top: var(--size) solid black;
   top: 55%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .selected-crypto {
+    min-width: 0;
+    width: 35%;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .selected-crypto {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .selected-crypto select {
+    padding: 10px;
+  }
 }
