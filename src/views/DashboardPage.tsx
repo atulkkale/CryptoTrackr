@@ -8,7 +8,7 @@ const DashboardPage: React.FC = () => {
       <SectionWrapper sectionClass="current-price-section">
         <CurrentPriceDisplay />
       </SectionWrapper>
-      <SectionWrapper sectionClass="current-price-section">
+      <SectionWrapper sectionClass="bar-chart-section">
         <BarChart />
       </SectionWrapper>
     </>
