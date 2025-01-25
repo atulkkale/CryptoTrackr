@@ -33,3 +33,47 @@
   font-size: 18px;
   text-align: center;
 }
+
+@media only screen and (max-width: 768px) {
+  .crypto-over-view li {
+    min-width: 0;
+  }
+
+  .crypto-over-view h2 {
+    font-size: 17px;
+  }
+
+  .crypto-over-view span {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .crypto-over-view {
+    padding: 20px 0 35px;
+  }
+
+  .crypto-over-view ul {
+    justify-content: space-between;
+  }
+
+  .crypto-over-view li {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .crypto-over-view ul {
+    flex-direction: column;
+  }
+
+  .crypto-over-view ul:first-child {
+    margin-bottom: auto;
+  }
+
+  .crypto-over-view li {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+}
