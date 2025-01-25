@@ -10,6 +10,8 @@ const LivePrice: React.FC<LivePriceProps> = memo(({ id }) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!id) return;
+
     const ws = new WebSocket(`wss://ws.coincap.io/prices?assets=${id}`);
 
     ws.onmessage = (event) => {
@@ -31,13 +33,13 @@ const LivePrice: React.FC<LivePriceProps> = memo(({ id }) => {
     return () => {
       ws.close();
     };
-  }, []);
+  }, [id]);
 
   if (isLoading) return <span>Loading...</span>;
 
   if (error) return <span>{error}</span>;
 
-  return <span>{parseFloat(livePrice).toFixed(7)}</span>;
+  return <span>{livePrice ? parseFloat(livePrice).toFixed(7) : "N/A"}</span>;
 });
 
 export default LivePrice;
