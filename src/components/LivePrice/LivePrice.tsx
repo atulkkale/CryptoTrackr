@@ -2,9 +2,10 @@ import { memo, useEffect, useState } from "react";
 
 interface LivePriceProps {
   id: string;
+  symbol: string;
 }
 
-const LivePrice: React.FC<LivePriceProps> = memo(({ id }) => {
+const LivePrice: React.FC<LivePriceProps> = memo(({ id, symbol }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [livePrice, setLivePrice] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -35,11 +36,15 @@ const LivePrice: React.FC<LivePriceProps> = memo(({ id }) => {
     };
   }, [id]);
 
-  if (isLoading) return <span>Loading...</span>;
+  if (isLoading) return <span>Loading Live Prices...</span>;
 
   if (error) return <span>{error}</span>;
 
-  return <span>{livePrice ? parseFloat(livePrice).toFixed(7) : "N/A"}</span>;
+  return (
+    <span>
+      {livePrice ? parseFloat(livePrice).toFixed(7) : "N/A"} {symbol}
+    </span>
+  );
 });
 
 export default LivePrice;
