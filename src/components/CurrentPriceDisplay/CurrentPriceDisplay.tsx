@@ -7,7 +7,7 @@ import "./CurrentPriceDisplay.css";
 import { RootState } from "../../store/store";
 import { fetchAssetById } from "../../api/cryptoApi";
 import { updateLastFetchTime } from "../../store/cryptoSlice";
-import { getCurrentTime } from "@utils/util";
+import { getCurrentTime, getRandomPriceCardColor } from "@utils/util";
 import LivePrice from "@components/LivePrice/LivePrice";
 
 const CurrentPriceDisplay: React.FC = () => {
@@ -31,14 +31,17 @@ const CurrentPriceDisplay: React.FC = () => {
 
   if (data) {
     return (
-      <div className="current-price">
+      <div
+        className="current-price"
+        style={{ backgroundColor: getRandomPriceCardColor() }}
+      >
         <h2>{data.name}</h2>
         <img
           src="https://criptic.vercel.app/_next/static/media/bitcoin.81bd702b.svg"
           alt={data.name}
         />
         <div className="coin-price">
-          <LivePrice id={data.id} /> {data.symbol}
+          <LivePrice id={selectedCrypto!} /> {data.symbol}
         </div>
         <ul>
           <li className="price">{parseFloat(data.priceUsd).toFixed(2)} USD</li>
