@@ -1,3 +1,5 @@
+import "./CryptoDescription.css";
+
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 
@@ -9,14 +11,18 @@ const CryptoDescription: React.FC = () => {
     (state: RootState) => state.crypto.activeCrypto
   );
 
-  const { data: description } = useQuery({
+  const { data } = useQuery({
     queryKey: ["description", selectedCrypto],
     queryFn: () => fetchDescriptionById(selectedCrypto!),
     enabled: !!selectedCrypto,
   });
+
   return (
     <div className="crypto-description">
-      <p>{description ? description : "Description not found"}</p>
+      <h2>{selectedCrypto}</h2>
+      <p>
+        {data?.description ? data.description : "Description not available"}
+      </p>
     </div>
   );
 };

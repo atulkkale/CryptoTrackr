@@ -55,12 +55,15 @@ export const fetchMarkets = async (id: string): Promise<MarketData[]> => {
 
 export const fetchDescriptionById = async (
   id: string
-): Promise<string | null> => {
+): Promise<{ name: string; description: string } | null> => {
   try {
     const response = await axios.get(
       `https://api.coingecko.com/api/v3/coins/${id}`
     );
-    return response.data?.description?.en;
+    return {
+      name: response.data?.name,
+      description: response.data?.description?.en,
+    };
   } catch (err) {
     throw new Error("Failed to fetch assets");
   }
