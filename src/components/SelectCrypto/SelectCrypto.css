@@ -50,6 +50,7 @@
 @media only screen and (max-width: 992px) {
   .selected-crypto {
     margin-left: 0;
+    width: 30%;
   }
 }
 
