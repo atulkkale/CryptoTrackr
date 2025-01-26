@@ -1,0 +1,8 @@
+.loading-text.text-center {
+  text-align: center;
+}
+
+.loading-text.xl {
+  font-size: 30px;
+  font-weight: 600;
+}
